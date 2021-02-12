@@ -120,6 +120,34 @@ bool LinkedList<T>::removeBack()
 		Fix this method
 	*/
 
+	Node<T>* runner = m_front;
+
+	if (m_front == nullptr){
+		return false;
+	}
+	if(m_size == 1){
+		delete m_front;
+		m_front = nullptr;
+		isRemoved = true;
+	}else if (m_size == 2){
+		lastNode = m_front->getNext();
+		delete lastNode;
+		lastNode = nullptr;
+		m_front->setNext(lastNode);
+		isRemoved = true;
+	}else{
+		for (int i = 0; i < (m_size - 2); i++){
+			runner = runner->getNext();
+		}
+		secondintoLast = runner;
+		lastNode = runner->getNext();
+		delete lastNode;
+		lastNode = nullptr;
+		secondintoLast ->setNext(lastNode);
+		isRemoved = true;
+	}
+	m_size--;
+
 	return(isRemoved);
 }
 
